@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yajienet.oauthjwt.dao.PermissionGroupPermissionDAO">
+  <resultMap id="BaseResultMap" type="cn.yajienet.oauthjwt.entity.PermissionGroupPermissionKey">
+    <id column="permission_group_id" jdbcType="INTEGER" property="permissionGroupId" />
+    <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="cn.yajienet.oauthjwt.entity.PermissionGroupPermissionKey">
+    delete from permission_group_permission
+    where permission_group_id = #{permissionGroupId,jdbcType=INTEGER}
+      and permission_id = #{permissionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="permission_group_id" keyProperty="permissionGroupId" parameterType="cn.yajienet.oauthjwt.entity.PermissionGroupPermissionKey" useGeneratedKeys="true">
+    insert into permission_group_permission (permission_id)
+    values (#{permissionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="permission_group_id" keyProperty="permissionGroupId" parameterType="cn.yajienet.oauthjwt.entity.PermissionGroupPermissionKey" useGeneratedKeys="true">
+    insert into permission_group_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="permissionId != null">
+        permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="permissionId != null">
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

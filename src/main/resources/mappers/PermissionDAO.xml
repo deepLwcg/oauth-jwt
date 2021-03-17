@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yajienet.oauthjwt.dao.PermissionDAO">
+  <resultMap id="BaseResultMap" type="cn.yajienet.oauthjwt.entity.Permission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="alias" jdbcType="VARCHAR" property="alias" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="is_enable" jdbcType="BIT" property="isEnable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, permission_name, `alias`, description, uri, `method`, is_enable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.yajienet.oauthjwt.entity.Permission" useGeneratedKeys="true">
+    insert into permission (permission_name, `alias`, description, 
+      uri, `method`, is_enable)
+    values (#{permissionName,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{uri,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{isEnable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.yajienet.oauthjwt.entity.Permission" useGeneratedKeys="true">
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="permissionName != null">
+        permission_name,
+      </if>
+      <if test="alias != null">
+        `alias`,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="uri != null">
+        uri,
+      </if>
+      <if test="method != null">
+        `method`,
+      </if>
+      <if test="isEnable != null">
+        is_enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="permissionName != null">
+        #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null">
+        #{isEnable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yajienet.oauthjwt.entity.Permission">
+    update permission
+    <set>
+      <if test="permissionName != null">
+        permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        `alias` = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        `method` = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null">
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yajienet.oauthjwt.entity.Permission">
+    update permission
+    set permission_name = #{permissionName,jdbcType=VARCHAR},
+      `alias` = #{alias,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      `method` = #{method,jdbcType=VARCHAR},
+      is_enable = #{isEnable,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from permission
+  </select>
+  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from permission p
+    inner join role_permission rp on p.id = rp.permission_id
+    where rp.role_id=#{roleId,jdbcType=INTEGER}
+  </select>
+</mapper>
