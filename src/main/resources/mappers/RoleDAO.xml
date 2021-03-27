@@ -73,4 +73,12 @@
       is_enable = #{isEnable,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from role
+  </select>
+  <select id="selectByUserId" parameterType="integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from role
+        inner join user_role as ur on  ur.role_id = role.id
+        where ur.user_id = #{uid,jdbcType=INTEGER}
+  </select>
 </mapper>

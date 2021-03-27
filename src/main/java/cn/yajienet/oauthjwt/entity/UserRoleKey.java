@@ -13,6 +13,14 @@ public class UserRoleKey implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public UserRoleKey() {
+    }
+
+    public UserRoleKey(Integer userId, Integer roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
+
     public Integer getUserId() {
         return userId;
     }

@@ -1,12 +1,11 @@
-package cn.yajienet.oauthjwt.dao;
+package cn.yajienet.oauthjwt.service;
 
 import cn.yajienet.oauthjwt.entity.Role;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface RoleDAO {
+public interface RoleService {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Role record);

@@ -22,7 +22,7 @@ import java.util.Date;
  */
 @Slf4j
 @Component
-public class JwtUtils {
+public class JwtUtil {
 
     @Value(value = "${spring.application.name}")
     private String appName;
@@ -32,7 +32,7 @@ public class JwtUtils {
     private String secret;
 
     @Resource
-    private RedisUtils redisUtils;
+    private RedisUtil redisUtils;
 
     //有效期
     @Value("${jwt.expiration:604800}")
@@ -60,7 +60,7 @@ public class JwtUtils {
             claims = Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody();
         }catch (Exception e){
             claims = null;
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage());
         }
         return claims;
     }
@@ -125,7 +125,6 @@ public class JwtUtils {
             username = claims.getSubject();
         }catch (Exception e){
             username = null;
-            e.printStackTrace();
         }
         return username;
     }

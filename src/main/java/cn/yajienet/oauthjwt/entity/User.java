@@ -1,21 +1,43 @@
 package cn.yajienet.oauthjwt.entity;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * user
- * @author 
+ *
+ * @author
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
     private Integer id;
 
+    @NotBlank(message = "用户名不能为空")
+    @Pattern(regexp = "^[a-zA-Z]\\w{5,16}$", message = "字母开头，长度在5~16之间，只能包含字母、数字和下划线")
+    @JsonAlias(value = "username")
     private String userName;
 
+    @Email(message = "邮箱错误")
+    @NotBlank(message = "邮箱不能为空")
+    @Size(max = 100, message = "电子邮件长度不得超过100")
     private String email;
 
+    @NotBlank(message = "手机号不能为空")
+    @Pattern(regexp = "^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\\d{8}$", message = "手机号错误")
     private String phone;
 
+    @JsonIgnore(value = false)
+    @NotBlank(message = "密码不能为空")
+    @Pattern(regexp = "^[a-zA-Z]\\w{5,18}$", message = "字母开头，长度在6~18之间，只能包含字母、数字和下划线")
     private String password;
 
     private Boolean isEnable;
@@ -103,13 +125,13 @@ public class User implements Serializable {
         }
         User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getIsEnable() == null ? other.getIsEnable() == null : this.getIsEnable().equals(other.getIsEnable()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
-            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
+                && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+                && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+                && (this.getIsEnable() == null ? other.getIsEnable() == null : this.getIsEnable().equals(other.getIsEnable()))
+                && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
+                && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
     @Override

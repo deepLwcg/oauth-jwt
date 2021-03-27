@@ -1,6 +1,6 @@
 package cn.yajienet.oauthjwt.filter;
 
-import cn.yajienet.oauthjwt.utils.JwtUtils;
+import cn.yajienet.oauthjwt.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,10 +27,10 @@ import java.io.IOException;
 @Component
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
-    @Resource(name = "userSecurityService")
+    @Resource(name = "userSecurityServiceImpl")
     private UserDetailsService userDetailsService;
     @Resource
-    private JwtUtils jwtUtils;
+    private JwtUtil jwtUtils;
     @Value("${jwt.header:Authorization}")
     private String header = "Authorization";
     @Value("${jwt.token.header:Bearer }")

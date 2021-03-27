@@ -18,7 +18,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Slf4j
 @Component
-public class RedisUtils {
+public class RedisUtil {
 
     /**
      * 默认编码
@@ -32,7 +32,7 @@ public class RedisUtils {
 
     private JedisConnectionFactory jedisConnectionFactory;
 
-    public RedisUtils(RedisTemplate<String, String> redisTemplate) {
+    public RedisUtil(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

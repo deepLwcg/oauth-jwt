@@ -38,12 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${spring.mvc.static-path-pattern}")
     private String staticPathPattern;
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Resource(name = "userSecurityService")
+    @Resource(name = "userSecurityServiceImpl")
     private UserDetailsService userDetailsService;
 
     @Resource

@@ -2,7 +2,7 @@ package cn.yajienet.oauthjwt.oauth;
 
 import cn.yajienet.oauthjwt.POJO.Result;
 import cn.yajienet.oauthjwt.POJO.User;
-import cn.yajienet.oauthjwt.utils.JwtUtils;
+import cn.yajienet.oauthjwt.utils.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -27,7 +27,7 @@ import java.util.Date;
 public class OAuthLoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Resource
-    private JwtUtils jwtUtils;
+    private JwtUtil jwtUtils;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

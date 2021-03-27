@@ -29,7 +29,7 @@ public class OAuthAccessDeniedHandler extends AccessDeniedHandlerImpl {
         response.setHeader("Content-Type","application/json;charset=UTF-8");
         PrintWriter writer = response.getWriter();
         ObjectMapper mapper = new ObjectMapper();
-        writer.print(mapper.writeValueAsString(Result.builder().code(400).error("error").message("权限不足").path(request.getRequestURI()).timestamp(new Date()).build()));
+        writer.print(mapper.writeValueAsString(Result.builder().code(403).error("Access Denied").message("权限不足").path(request.getRequestURI()).timestamp(new Date()).build()));
         writer.flush();
         writer.close();
     }
